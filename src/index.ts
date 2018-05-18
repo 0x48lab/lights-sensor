@@ -3,8 +3,8 @@ import { IEndpoints, Endpoints, MockEndpoints } from "./endpoints"
 import * as Debug from "debug"
 import * as Dotenv from "dotenv"
 
-require('dotenv').config()
-const debug = require('debug')('app')
+Dotenv.config()
+const debug = Debug('app')
 const isMock = process.env.USE_MOCK === "true"
 
 class Main {
