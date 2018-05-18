@@ -11,7 +11,7 @@ class Main {
     private sensor: ISensor
     private endpoints: IEndpoints
     private luxThreshold: number
-    private isOpened: boolean = false
+    private isOpened: boolean = true
 
     constructor() {
         this.sensor = isMock ? new MockSensor() : new Sensor()
