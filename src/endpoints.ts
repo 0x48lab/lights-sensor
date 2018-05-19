@@ -7,7 +7,7 @@ export interface IEndpoints {
 export class Endpoints implements IEndpoints {
     postMessage(isOpened: boolean): Promise<any> {
         const discordWebhookUrl = process.env.DISCORD_WEBHOOK_URL
-        const message = isOpened ? `明るくなったので、教室は開いてます` : `完全に暗くなったので教室は閉まってます`
+        const message = isOpened ? `教室が明るくなった！誰かきたにゃん！` : `暗くなったにゃん、、誰もいないにゃん！`
 
         return axios.post(`${discordWebhookUrl}`, {
             username: process.env.DISCORD_USERNAME,
