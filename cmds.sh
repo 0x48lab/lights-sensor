@@ -10,8 +10,12 @@ Usage:
     $(basename ${0}) [command] [<options>]
 
 Options:
-    upload               ラズパイにソースコードをアップロード
-    start                ラズパイ上で実行
+    [開発側用タスク]
+        upload               ソースコードをアップロード
+
+    [Raspberry Pi用タスク]
+        start                プログラムの開始
+        stop                 プログラムの停止
 EOF
 }
 
@@ -19,17 +23,21 @@ case ${1} in
 
     upload)
         npm run build
+
+        # 必要なリソースのみを転送
         rsync -avz \
-            --delete \
-            --exclude /.git \
-            --exclude /.gitignore \
-            --exclude /src \
-            --exclude /node_modules \
-            ./ pi@hack00.local:/home/pi/lights
+            --exclude *.js.map \
+            build tsl2561.py \
+            cmds.sh .env package.json package-lock.json \
+            pi@hack00.local:/home/pi/lights
     ;;
 
     start)
-        pm2 start ./build/index.js
+        pm2 start ./build/index.js --name lights-sensor
+    ;;
+
+    stop)
+        pm2 stop lights-sensor
     ;;
 
     *)
