@@ -48,6 +48,7 @@ class Main {
     }
 }
 
+console.log(`Started: ${new Date().toISOString()}`)
 let main = new Main()
 main.loop()
 .catch(err => {
