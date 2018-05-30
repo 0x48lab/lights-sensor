@@ -16,9 +16,9 @@ class Main {
     constructor() {
         this.sensor = isMock ? new MockSensor() : new Sensor()
         this.endpoints = isMock ? new MockEndpoints() : new Endpoints()
-        // on: 142.6, 105.8, ...
+        // on: 142.6, 105.8, 73.4,  ...
         // off: 4.9, 0.5, ...
-        this.luxThreshold = 70
+        this.luxThreshold = 50
     }
 
     async loop() {
