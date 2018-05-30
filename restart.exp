@@ -1,4 +1,4 @@
-#!/usr/bin/expect -d
+#!/usr/bin/expect
 
 set PW [lindex $argv 0]
 
