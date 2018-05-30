@@ -28,7 +28,7 @@ case ${1} in
         rsync -avz \
             --exclude *.js.map \
             build tsl2561.py \
-            cmds.sh .env package.json package-lock.json \
+            cmds.sh package.json package-lock.json \
             pi@hack00.local:/home/pi/lights
     ;;
 
