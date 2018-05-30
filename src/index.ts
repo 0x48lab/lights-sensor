@@ -12,6 +12,7 @@ class Main {
     private endpoints: IEndpoints
     private luxThreshold: number
     private isOpened: boolean = true
+    private  luxs : number[] = []
 
     constructor() {
         this.sensor = isMock ? new MockSensor() : new Sensor()
@@ -25,8 +26,16 @@ class Main {
         try {
             let sensorResult = await this.sensor.getLux()
             debug(`lux=${sensorResult.lux}`)
-            let currentIsOpened = sensorResult.lux > this.luxThreshold
-            if (sensorResult.lux != -1 && this.isOpened != currentIsOpened) {
+
+            this.luxs.push(sensorResult.lux)
+            if(this.luxs.length>5) this.luxs.shift()
+            let sum = this.luxs.reduce(function(prev, current, i, arr) {
+                return prev+current;
+            });
+            let lux = sum/this.luxs.length
+
+            let currentIsOpened = lux > this.luxThreshold
+            if (lux != -1 && this.isOpened != currentIsOpened) {
                 debug(`currentIsOpened=${currentIsOpened}`)
                 await this.endpoints.postMessage(currentIsOpened)
             }
